@@ -9,3 +9,27 @@ function woo_add_cart_fee() {
 }
 
 add_action( 'woocommerce_cart_calculate_fees', 'woo_add_cart_fee' );
+
+
+
+// Weecommerce Change Return to shop url
+function skyverge_change_empty_cart_button_url() {
+	return get_site_url();
+	//Can use any page instead, like return '/sample-page/';
+}
+add_filter( 'woocommerce_return_to_shop_redirect', 'skyverge_change_empty_cart_button_url' );
+//************
+
+// Weecommerce Change Return to shop Text
+function change_woocommerce_return_to_shop_text( $translated_text, $text, $domain ) {
+
+        switch ( $translated_text ) {
+            case 'Return to shop' :
+               $translated_text = __( 'Return to Store', 'woocommerce' );
+               break;
+        }
+    return $translated_text;
+}
+add_filter( 'gettext', 'change_woocommerce_return_to_shop_text', 20, 3 );
+
+//*********************
