@@ -33,3 +33,21 @@ function change_woocommerce_return_to_shop_text( $translated_text, $text, $domai
 add_filter( 'gettext', 'change_woocommerce_return_to_shop_text', 20, 3 );
 
 //*********************
+
+
+
+
+//Clear Card Before Adding new Item
+
+// before addto cart, only allow 1 item in a cart
+add_filter( 'woocommerce_add_to_cart_validation', 'woo_custom_add_to_cart_before' );
+ 
+function woo_custom_add_to_cart_before( $cart_item_data ) {
+ 
+    global $woocommerce;
+    $woocommerce->cart->empty_cart();
+ 
+    // Do nothing with the data and return
+    return true;
+}
+//***************************************************
